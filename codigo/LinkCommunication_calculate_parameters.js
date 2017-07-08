@@ -5,6 +5,15 @@
  */
 
 /**
+ * @function dbmParaW Transforma de dBm para Watts
+ * @param {number} dbm A potência em dBm
+ * @returns {number} A potência em Watts
+ */
+function dbmParaW(dbm){
+    return Math.pow(10, dbm/10)/1000;
+}
+
+/**
  * @function [beta] Calcula o comprimento de onda
  * @constant {number} c velocidade da luz
  * @param {number} f frequencia
@@ -41,7 +50,7 @@ function Prr(Pt,Gt,Gr,ht,hr,d){
  */
 function Prl(Pt,Gt,Gr,d,f,L){
    
-    return 10*Math.log10((Pt*Gt*Gr*lambda(f)*lambda(f)/(4*Math.PI*Math.pow(d,2))*L)*1000);
+    return 10*Math.log10((Pt*Gt*Gr*lambda(f)*lambda(f)/(Math.pow(d*4*Math.PI,2))*L)*1000);
 }
 
 /**
