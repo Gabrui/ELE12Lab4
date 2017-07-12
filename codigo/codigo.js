@@ -2,6 +2,12 @@
 
 /* global MathJax, Plotly */
 
+function textoLink(linkPossivel) {
+    if (linkPossivel)
+        return "<p> O link de comunicação é possível. </p>"
+    return "<p> Não é possível estabelecer um link de comunicação. </p>"
+}
+
 function estiloClasse(classe, estilo) {
     lista = document.getElementsByClassName(classe);
     for (var i = lista.length; i > 0; i--) {
@@ -56,12 +62,83 @@ function calcular() {
     }
     var PotFaca = dbmParaW(PotFacaDbm);
 
+    var linkPossivel = false;
     var texto = "";
+    var dados = [];
+    
+    var quantIter = 100;
+    var mult = 10;
+    var distancias = [];
+    var lvd = [];
+    var solo = [];
+    var faca = [];
+    var mul = 0;
+    for (var i = 0; i < quantIter; i++) {
+        mul = (1/mult + i/quantIter*mult);
+        distancias[i] = dkm*mul;
+        lvd[i] = Prl(Pt, Gt, Gr, dkm*1000*mul, f, 1);
+        solo[i] = Prr(Pt, Gt, Gr, ht, hr, dkm*1000*mul);
+        faca[i] = lvd [i];
+        if (dkm > df)
+            faca[i] += Gd(v(hg, (dkm - df)*1000*mul, df*1000*mul, f));
+    }
+    
+    
+    if (modelo == "lvd" || modelo == "todos") {
+        linkPossivel = PotLvdDbm > Sdbm;
+        texto += "<p>LVD: Potência Recebida = "+ PotLvd.toExponential(3) + " W = " + PotLvdDbm.toFixed(2) + " dBm</p>";
+        dados.push({
+            x: distancias,
+            y: lvd,
+            mode: 'lines',
+            name: 'Linha de Visada Direta',
+            line: {shape: 'spline'},
+            type: 'scatter'
+        });
+    } 
+    if (modelo == "gumefaca" || modelo == "todos"){
+        linkPossivel = PotSoloDbm > Sdbm;
+        texto += "<p>Reflexão no solo: Potência Recebida = "+ PotSolo.toExponential(3) + " W = " + PotSoloDbm.toFixed(2) + " dBm</p>";
+        dados.push({
+            x: distancias,
+            y: faca,
+            mode: 'lines',
+            name: 'Difração de Gume de Faca',
+            line: {shape: 'spline'},
+            type: 'scatter'
+        });
+    } 
+    if (modelo == "solo" || modelo == "todos") {
+        linkPossivel = PotFacaDbm > Sdbm;
+        texto += "<p>Gume de Faca: Potência Recebida = "+ PotFaca.toExponential(3) + " W = " + PotFacaDbm.toFixed(2) + " dBm</p>";
+        dados.push({
+            x: distancias,
+            y: solo,
+            mode: 'lines',
+            name: 'Reflexão no Solo',
+            line: {shape: 'spline'},
+            type: 'scatter'
+        });
+    }
 
-    texto += "<p>LVD: Potência Recebida = "+ PotLvd.toExponential(3) + " W = " + PotLvdDbm.toFixed(2) + " dBm</p>";
-    texto += "<p>Reflexão no solo: Potência Recebida = "+ PotSolo.toExponential(3) + " W = " + PotSoloDbm.toFixed(2) + " dBm</p>";
-    texto += "<p>Gume de Faca: Potência Recebida = "+ PotFaca.toExponential(3) + " W = " + PotFacaDbm.toFixed(2) + " dBm</p>";
 
-    document.getElementById("respostas").innerHTML = texto;
+    document.getElementById("respostas").innerHTML = textoLink(linkPossivel) + texto;
+    
+    var estilo = {
+        legend: {
+            y: 0.5,
+            font: {size: 16},
+            yref: 'paper'
+        },
+        title: 'Análise de potência recebida',
+        xaxis: {
+            type: 'log',
+            title: 'Distância entre as antenas (Km)'
+        },
+        yaxis: {
+            title: 'Potência recebida (dBm)'
+        }
+    };
+    Plotly.newPlot('grafico', dados, estilo);
 
 }
