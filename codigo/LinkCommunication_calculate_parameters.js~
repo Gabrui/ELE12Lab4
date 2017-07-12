@@ -70,7 +70,7 @@ function v(h,d1,d2,f){
 /**
  * @function {Gd} Calcula perda de ganho
  * @param {number} vfk parametro de Fresnel Kirchhoff 
- * @returns {number} perda de ganho em dBi
+ * @returns {number} perda de ganho em dB
  */
 function Gd(vfk){
     

@@ -48,7 +48,6 @@
   		<option value="lvd">Linha de Visada Direta</option>
   		<option value="gumefaca">Difração por fume de faca</option>
   		<option value="solo">Reflexão Solo</option>
-  		<option value="todos">Todos os modelos</option>
 	</select></td>
       </tr>
       <tr>

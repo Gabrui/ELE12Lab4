@@ -2,29 +2,17 @@
 
 /* global MathJax, Plotly */
 
-function estiloClasse(classe, estilo) {
-    lista = document.getElementsByClassName(classe);
-    for (var i = lista.length; i > 0; i--) {
-            lista[i-1].style.display = estilo;
-    }
-}
-
 
 function mudarEntradas() {
     var modelo = document.getElementsByName("modelo")[0].value;
+    var lvds = document.getElementsByClassName("lvd");
+    var solos = document.getElementsByClassName("solo");
     if (modelo == "lvd") {
-        estiloClasse("gumefaca", "none");
-        estiloClasse("solo", "none");
-    } else if (modelo == "gumefaca"){
-        estiloClasse("gumefaca", "");
-        estiloClasse("solo", "none");
-    } else if (modelo == "solo") {
-        estiloClasse("gumefaca", "none");
-        estiloClasse("solo", "");
+
     } else {
-        estiloClasse("gumefaca", "");
-        estiloClasse("solo", "");
+
     }
+
 }
 
 
