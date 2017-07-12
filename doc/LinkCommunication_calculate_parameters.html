@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>LinkCommunication_calculate_parameters.js</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Monospaced}
+pre {color: #000000; background-color: #ffffff; font-family: Monospaced}
+table {color: #000000; background-color: #e9e8e2; font-family: Monospaced}
+.ST0 {color: #969696; background-color: #e9eff8}
+.ST1 {color: #969696; font-family: Monospaced; font-weight: bold}
+.ST2 {font-family: Monospaced; font-weight: bold}
+.comment-line {color: #969696}
+.keyword {color: #0000e6}
+.ST3 {color: #9f0d79}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\Dylan N. Sugimoto\Desktop\Lab-4_ELE-12\ELE12Lab4\codigo\LinkCommunication_calculate_parameters.js</td></tr></table>
+<pre>
+ 1 <span class="ST0">/*</span> 
+ 2  <span class="comment-line">*</span> <span class="comment-line">To</span> <span class="comment-line">change</span> <span class="comment-line">this</span> <span class="comment-line">license</span> <span class="comment-line">header</span><span class="comment-line">,</span> <span class="comment-line">choose</span> <span class="comment-line">License</span> <span class="comment-line">Headers</span> <span class="comment-line">in</span> <span class="comment-line">Project</span> <span class="comment-line">Properties.</span>
+ 3  <span class="comment-line">*</span> <span class="comment-line">To</span> <span class="comment-line">change</span> <span class="comment-line">this</span> <span class="comment-line">template</span> <span class="comment-line">file</span><span class="comment-line">,</span> <span class="comment-line">choose</span> <span class="comment-line">Tools</span> <span class="comment-line">|</span> <span class="comment-line">Templates</span>
+ 4  <span class="comment-line">*</span> <span class="comment-line">and</span> <span class="comment-line">open</span> <span class="comment-line">the</span> <span class="comment-line">template</span> <span class="comment-line">in</span> <span class="comment-line">the</span> <span class="comment-line">editor.</span>
+ 5  <span class="comment-line">*/</span>
+ 6 
+ 7 <span class="comment-line">/**</span>
+ 8  <span class="comment-line">*</span> <span class="ST1">@function</span> <span class="comment-line">dbmParaW</span> <span class="comment-line">Transforma</span> <span class="comment-line">de</span> <span class="comment-line">dBm</span> <span class="comment-line">para</span> <span class="comment-line">Watts</span>
+ 9  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">dbm</span> <span class="comment-line">A</span> <span class="comment-line">potÃªncia</span> <span class="comment-line">em</span> <span class="comment-line">dBm</span>
+10  <span class="comment-line">*</span> <span class="ST1">@returns</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">A</span> <span class="comment-line">potÃªncia</span> <span class="comment-line">em</span> <span class="comment-line">Watts</span>
+11  <span class="comment-line">*/</span>
+12 <span class="keyword">function</span> <span class="ST2">dbmParaW</span>(dbm){
+13     <span class="keyword">return</span> <span class="ST3">Math</span>.pow(10, dbm/10)/1000;
+14 }
+15 
+16 <span class="comment-line">/**</span>
+17  <span class="comment-line">*</span> <span class="ST1">@function</span> <span class="comment-line">[</span><span class="comment-line">beta</span><span class="comment-line">]</span> <span class="comment-line">Calcula</span> <span class="comment-line">o</span> <span class="comment-line">comprimento</span> <span class="comment-line">de</span> <span class="comment-line">onda</span>
+18  <span class="comment-line">*</span> <span class="ST1">@constant</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">c</span> <span class="comment-line">velocidade</span> <span class="comment-line">da</span> <span class="comment-line">luz</span>
+19  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">f</span> <span class="comment-line">frequencia</span>
+20  <span class="comment-line">*</span> <span class="ST1">@returns</span> <span class="comment-line">comprimento</span> <span class="comment-line">de</span> <span class="comment-line">onda</span>
+21  <span class="comment-line">*/</span>
+22 <span class="keyword">function</span> <span class="ST2">lambda</span>(f){
+23     <span class="ST3">c</span> = 300000000;
+24     <span class="keyword">return</span> <span class="ST3">c</span>/f;
+25 }
+26 
+27 <span class="comment-line">/**</span>
+28  <span class="comment-line">*</span> <span class="ST1">@function</span> <span class="comment-line">[</span><span class="comment-line">Prr</span><span class="comment-line">]</span> <span class="comment-line">Calcula</span> <span class="comment-line">a</span> <span class="comment-line">potencia</span> <span class="comment-line">recebida</span> <span class="comment-line">modelo</span> <span class="comment-line">2</span> <span class="comment-line">raios</span> <span class="comment-line">refletidos</span>
+29  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">Pt</span> <span class="comment-line">potencia</span> <span class="comment-line">transmitida</span> <span class="comment-line">em</span> <span class="comment-line">Watts</span>
+30  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">Gt</span> <span class="comment-line">ganho</span> <span class="comment-line">do</span> <span class="comment-line">transmissor</span> <span class="comment-line">NAO</span> <span class="comment-line">eh</span> <span class="comment-line">em</span> <span class="comment-line">dB</span>
+31  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">Gr</span> <span class="comment-line">ganho</span> <span class="comment-line">do</span> <span class="comment-line">receptor</span> <span class="comment-line">NAO</span> <span class="comment-line">eh</span> <span class="comment-line">em</span> <span class="comment-line">dB</span>
+32  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">ht</span> <span class="comment-line">altura</span> <span class="comment-line">do</span> <span class="comment-line">transmissor</span>
+33  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">hr</span> <span class="comment-line">altura</span> <span class="comment-line">do</span> <span class="comment-line">receptor</span>
+34  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">d</span> <span class="comment-line">distancia</span> <span class="comment-line">entre</span> <span class="comment-line">as</span> <span class="comment-line">antenas</span> <span class="comment-line">em</span> <span class="comment-line">metros</span>
+35  <span class="comment-line">*</span> <span class="ST1">@returns</span> <span class="comment-line">potencia</span> <span class="comment-line">recebida</span> <span class="comment-line">em</span> <span class="comment-line">dBm</span> 
+36  <span class="comment-line">*/</span>
+37 <span class="keyword">function</span> <span class="ST2">Prr</span>(Pt,Gt,Gr,ht,hr,d){
+38     
+39     <span class="keyword">return</span> 10*<span class="ST3">Math</span>.log10((Pt*Gt*Gr*ht*ht*hr*hr/<span class="ST3">Math</span>.pow(d,4))*1000);
+40 }
+41 <span class="comment-line">/**</span>
+42  <span class="comment-line">*</span> <span class="ST1">@function</span> <span class="comment-line">[</span><span class="comment-line">Prl</span><span class="comment-line">]</span> <span class="comment-line">Calcula</span> <span class="comment-line">a</span> <span class="comment-line">potencia</span> <span class="comment-line">recebida</span> <span class="comment-line">modelo</span> <span class="comment-line">linha</span> <span class="comment-line">de</span> <span class="comment-line">visada</span> <span class="comment-line">direta</span>
+43  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">Pt</span> <span class="comment-line">potencia</span> <span class="comment-line">transmitida</span> <span class="comment-line">em</span> <span class="comment-line">Watts</span>
+44  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">Gt</span> <span class="comment-line">ganho</span> <span class="comment-line">do</span> <span class="comment-line">transmissor</span> <span class="comment-line">NAO</span> <span class="comment-line">eh</span> <span class="comment-line">em</span> <span class="comment-line">dB</span>
+45  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">Gr</span> <span class="comment-line">ganho</span> <span class="comment-line">do</span> <span class="comment-line">receptor</span> <span class="comment-line">NAO</span> <span class="comment-line">eh</span> <span class="comment-line">em</span> <span class="comment-line">dB</span>
+46  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">f</span> <span class="comment-line">frequencia</span> <span class="comment-line">de</span> <span class="comment-line">operacao</span> <span class="comment-line">Hz</span>
+47  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">L</span> <span class="comment-line">atenuacao</span> <span class="comment-line">dissipativa</span> 
+48  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">d</span> <span class="comment-line">distancia</span> <span class="comment-line">entre</span> <span class="comment-line">as</span> <span class="comment-line">antenas</span> <span class="comment-line">em</span> <span class="comment-line">metros</span>
+49  <span class="comment-line">*</span> <span class="ST1">@returns</span> <span class="comment-line">potencia</span> <span class="comment-line">recebida</span> <span class="comment-line">em</span> <span class="comment-line">dBm</span> 
+50  <span class="comment-line">*/</span>
+51 <span class="keyword">function</span> <span class="ST2">Prl</span>(Pt,Gt,Gr,d,f,L){
+52    
+53     <span class="keyword">return</span> 10*<span class="ST3">Math</span>.log10((Pt*Gt*Gr*lambda(f)*lambda(f)/(<span class="ST3">Math</span>.pow(d*4*<span class="ST3">Math</span>.PI,2))*L)*1000);
+54 }
+55 
+56 <span class="comment-line">/**</span>
+57  <span class="comment-line">*</span> <span class="ST1">@function</span> <span class="comment-line">{</span><span class="comment-line">v</span><span class="comment-line">}</span>   <span class="comment-line">Calcula</span> <span class="comment-line">o</span> <span class="comment-line">parametro</span> <span class="comment-line">de</span> <span class="comment-line">Fresnel</span> <span class="comment-line">Kirchhoff</span>
+58  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">h</span> <span class="comment-line">altura</span> <span class="comment-line">do</span> <span class="comment-line">gume</span> <span class="comment-line">de</span> <span class="comment-line">faca</span> <span class="comment-line">em</span> <span class="comment-line">relacao</span> <span class="comment-line">a</span> <span class="comment-line">LVD</span> <span class="comment-line">em</span> <span class="comment-line">metro</span>
+59  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">d1</span> <span class="comment-line">distancia</span> <span class="comment-line">do</span> <span class="comment-line">transmissor</span> <span class="comment-line">ate</span> <span class="comment-line">o</span> <span class="comment-line">gume</span> <span class="comment-line">de</span> <span class="comment-line">faca</span> <span class="comment-line">em</span> <span class="comment-line">metro</span>
+60  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">d2</span> <span class="comment-line">distancia</span> <span class="comment-line">do</span> <span class="comment-line">receptor</span> <span class="comment-line">ate</span> <span class="comment-line">o</span> <span class="comment-line">gume</span> <span class="comment-line">de</span> <span class="comment-line">faca</span> <span class="comment-line">em</span> <span class="comment-line">metro</span>
+61  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">f</span> <span class="comment-line">frequencia</span> <span class="comment-line">de</span> <span class="comment-line">operacao</span>
+62  <span class="comment-line">*</span> <span class="ST1">@returns</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">parametro</span> <span class="comment-line">de</span> <span class="comment-line">Fresnel</span>
+63  <span class="comment-line">*/</span>
+64 <span class="keyword">function</span> <span class="ST2">v</span>(h,d1,d2,f){
+65     
+66    <span class="keyword">return</span> h*<span class="ST3">Math</span>.sqrt((2*(d1+d2))/(lambda(f)*d1*d2));
+67     
+68 }
+69 
+70 <span class="comment-line">/**</span>
+71  <span class="comment-line">*</span> <span class="ST1">@function</span> <span class="comment-line">{</span><span class="comment-line">Gd</span><span class="comment-line">}</span> <span class="comment-line">Calcula</span> <span class="comment-line">perda</span> <span class="comment-line">de</span> <span class="comment-line">ganho</span>
+72  <span class="comment-line">*</span> <span class="ST1">@param</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">vfk</span> <span class="comment-line">parametro</span> <span class="comment-line">de</span> <span class="comment-line">Fresnel</span> <span class="comment-line">Kirchhoff</span> 
+73  <span class="comment-line">*</span> <span class="ST1">@returns</span> <span class="comment-line">{</span><span class="comment-line">number</span><span class="comment-line">}</span> <span class="comment-line">perda</span> <span class="comment-line">de</span> <span class="comment-line">ganho</span> <span class="comment-line">em</span> <span class="comment-line">dBi</span>
+74  <span class="comment-line">*/</span>
+75 <span class="keyword">function</span> <span class="ST2">Gd</span>(vfk){
+76     
+77     <span class="keyword">if</span> (vfk &lt;= -1){
+78         <span class="keyword">return</span> 0;
+79     }
+80     <span class="keyword">else</span> <span class="keyword">if</span> (-1&lt;vfk&lt;= 0){
+81         <span class="keyword">return</span> 20*<span class="ST3">Math</span>.log10(0.5-0.62*vfk);
+82     }
+83     <span class="keyword">else</span> <span class="keyword">if</span>(0&lt; vfk &lt;=1 ){
+84         <span class="keyword">return</span> 20*<span class="ST3">Math</span>.log10(0.5*<span class="ST3">Math</span>.exp(-0.95*vfk));
+85         
+86     }
+87     <span class="keyword">else</span> <span class="keyword">if</span>(1&lt; vfk &lt;=2.4){
+88         <span class="keyword">return</span> 20*<span class="ST3">Math</span>.log10(0.4-<span class="ST3">Math</span>.sqrt(0.1184-(0.38-0.1*vfk)*(0.38-0.1*vfk)));
+89     }
+90     <span class="keyword">else</span>{
+91         <span class="keyword">return</span> 20*<span class="ST3">Math</span>.log10(0.225/vfk);
+92     }
+93 }
+94 
+95 
+</pre></body>
+</html>
