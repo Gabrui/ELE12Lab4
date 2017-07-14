@@ -34,7 +34,7 @@ function mudarEntradas() {
 }
 
 
-function calcular() {
+function calcular(direto,ground,gumefaca) {
 
     var Pt = Number(document.getElementsByName("Pt")[0].value);
     var Sdbm = Number(document.getElementsByName("Sdbm")[0].value);
@@ -46,7 +46,7 @@ function calcular() {
     var hg = Number(document.getElementsByName("hg")[0].value);
     var ht = Number(document.getElementsByName("ht")[0].value);
     var hr = Number(document.getElementsByName("hr")[0].value);
-    var modelo = document.getElementsByName("modelo")[0].value;
+    
 
     var Gt = Math.pow(10, Gtdb/10);
     var Gr = Math.pow(10, Grdb/10);
@@ -84,7 +84,7 @@ function calcular() {
     }
     
     
-    if (modelo == "lvd" || modelo == "todos") {
+    if (direto) {
         linkPossivel = PotLvdDbm > Sdbm;
         texto += "<p>LVD: Potência Recebida = "+ PotLvd.toExponential(3) + " W = " + PotLvdDbm.toFixed(2) + " dBm</p>";
         dados.push({
@@ -96,26 +96,26 @@ function calcular() {
             type: 'scatter'
         });
     } 
-    if (modelo == "gumefaca" || modelo == "todos"){
+    if (ground){
         linkPossivel = PotSoloDbm > Sdbm;
         texto += "<p>Reflexão no solo: Potência Recebida = "+ PotSolo.toExponential(3) + " W = " + PotSoloDbm.toFixed(2) + " dBm</p>";
-        dados.push({
-            x: distancias,
-            y: faca,
-            mode: 'lines',
-            name: 'Difração de Gume de Faca',
-            line: {shape: 'spline'},
-            type: 'scatter'
-        });
-    } 
-    if (modelo == "solo" || modelo == "todos") {
-        linkPossivel = PotFacaDbm > Sdbm;
-        texto += "<p>Gume de Faca: Potência Recebida = "+ PotFaca.toExponential(3) + " W = " + PotFacaDbm.toFixed(2) + " dBm</p>";
         dados.push({
             x: distancias,
             y: solo,
             mode: 'lines',
             name: 'Reflexão no Solo',
+            line: {shape: 'spline'},
+            type: 'scatter'
+        });
+    } 
+    if (gumefaca) {
+        linkPossivel = PotFacaDbm > Sdbm;
+        texto += "<p>Gume de Faca: Potência Recebida = "+ PotFaca.toExponential(3) + " W = " + PotFacaDbm.toFixed(2) + " dBm</p>";
+        dados.push({
+            x: distancias,
+            y: faca,
+            mode: 'lines',
+            name: 'Difração em Gume de Faca',
             line: {shape: 'spline'},
             type: 'scatter'
         });
@@ -142,3 +142,57 @@ function calcular() {
     Plotly.newPlot('grafico', dados, estilo);
 
 }
+
+
+
+$(document).ready(function () {
+var gumefaca = false;
+var ground = false;
+var direto = false;
+estiloClasse("gumefaca", "none");
+estiloClasse("solo", "none"); 
+    $("#direct").on("click", function(){
+        $(this).toggleClass("active");
+        if(!direto){
+        direto = true;
+        }
+        else
+        {
+        direto = false;    
+        }
+    });
+
+
+
+    $("#edge").on("click", function(){
+        $(this).toggleClass("active");
+        if(!gumefaca){
+        estiloClasse("gumefaca", "");
+        gumefaca = true;
+        }
+        else
+        {
+        estiloClasse("gumefaca", "none");
+        gumefaca = false;    
+        }
+    });
+
+    $("#ground_re").on("click", function(){
+        $(this).toggleClass("active");
+        if(!ground){
+        estiloClasse("solo", "");
+        ground = true;
+        }
+        else
+        {
+        estiloClasse("solo", "none");
+        ground = false;    
+        }
+    });
+
+    $(".btn-success").on("click", function () {
+        calcular(direto,ground,gumefaca);
+    });
+
+
+});

@@ -12,6 +12,7 @@
     <script src="codigo.js" type="text/javascript"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="estilo.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
@@ -20,6 +21,12 @@
 <body onload="mudarEntradas()">
 <h1> Lab 4 - ELE-12 - Links de Comunicação</h1>        
 <p> Especifique os parâmetros para calcular a potência recebida:</p>
+<p>     
+        <button type="button" id = "direct" class="btn btn-default" ><img src="direto.png" width="297" ><br>Linha de Visada Direta<br></button>
+        <button type="button" id = "ground_re" class="btn btn-default" ><img src="solo.png" width="297" ><br>Reflexão no Solo<br></button>
+        <button type="button" id = "edge" class="btn btn-default" ><img src="gume.png" width="302" ><br>Difração em Gume de Faca<br></button>       
+        
+</p>
 <form id="entradas" action="">
   <table class ="entrada">
       <tr>
@@ -41,15 +48,6 @@
       <tr>
         <td>$ \text{ Distância } \;\;\ d:$</td> 
         <td><input type="number" name="dkm" step="any" value="24567">$ (Km) $</td>
-      </tr>
-      <tr>
-        <td>$\text{ Modelo de Transmissão }$</td> 
-        <td><select name="modelo" onchange="mudarEntradas()">
-  		<option value="lvd">Linha de Visada Direta</option>
-  		<option value="gumefaca">Difração por fume de faca</option>
-  		<option value="solo">Reflexão Solo</option>
-  		<option value="todos">Todos os modelos</option>
-	</select></td>
       </tr>
       <tr>
         <td>$\text{ Sensibilidade do receptor } \;\;\ S :$</td> 
@@ -75,8 +73,7 @@
 </form>
 
 <p>Clique em calcular para obter as respostas.</p>
-
-<button onclick="calcular()">Calcular</button>
+<p><button type="button" class='btn btn-success' >Calcular<br></button></p>
 <p></p>
 
 
